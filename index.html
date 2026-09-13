@@ -1,0 +1,430 @@
+<title>AI Income Blueprint</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;900&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f5f1e6;
+    --paper-raised:#fbf8f0;
+    --ink:#182d40;
+    --ink-soft:#4e6478;
+    --ink-faint:#7c8ea0;
+    --line:#1c3a52;
+    --grid: rgba(28,58,82,0.10);
+    --grid-strong: rgba(28,58,82,0.22);
+    --accent:#c65a26;
+    --accent-ink:#fff7ef;
+    --good:#2f6b4f;
+    --shadow: rgba(24,45,64,0.14);
+    --font-display:'Big Shoulders Display', 'Arial Narrow', sans-serif;
+    --font-body:'Public Sans', -apple-system, Segoe UI, sans-serif;
+    --font-mono:'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0c2740;
+      --paper-raised:#11304c;
+      --ink:#eaf3fb;
+      --ink-soft:#a9c3d8;
+      --ink-faint:#7592aa;
+      --line:#bcdcf5;
+      --grid: rgba(234,244,255,0.07);
+      --grid-strong: rgba(234,244,255,0.16);
+      --accent:#ff9d5c;
+      --accent-ink:#20130a;
+      --good:#7fd9ac;
+      --shadow: rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0c2740;
+    --paper-raised:#11304c;
+    --ink:#eaf3fb;
+    --ink-soft:#a9c3d8;
+    --ink-faint:#7592aa;
+    --line:#bcdcf5;
+    --grid: rgba(234,244,255,0.07);
+    --grid-strong: rgba(234,244,255,0.16);
+    --accent:#ff9d5c;
+    --accent-ink:#20130a;
+    --good:#7fd9ac;
+    --shadow: rgba(0,0,0,0.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/32px 32px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/32px 32px,
+      var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.55;
+    padding-inline: max(16px, calc((100vw - 920px)/2));
+  }
+  .wrap{max-width:920px; margin:0 auto;}
+  h1,h2,h3{font-family:var(--font-display); text-wrap:balance; font-weight:800; letter-spacing:0.2px; margin:0;}
+  .mono{font-family:var(--font-mono);}
+  a{color:inherit;}
+  .measure{max-width:64ch;}
+
+  /* ---------- Title block header ---------- */
+  .titleblock{
+    margin-top:28px;
+    border:1.5px solid var(--line);
+    border-radius:2px;
+    position:relative;
+    padding:22px 22px 18px;
+  }
+  .titleblock::before, .titleblock::after,
+  .corner-tl, .corner-br{
+    content:"";
+    position:absolute;
+    width:14px; height:14px;
+    border-color:var(--accent);
+  }
+  .titleblock::before{ top:-1.5px; left:-1.5px; border-top:2.5px solid var(--accent); border-left:2.5px solid var(--accent);}
+  .titleblock::after{ bottom:-1.5px; right:-1.5px; border-bottom:2.5px solid var(--accent); border-right:2.5px solid var(--accent);}
+  .doc-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    gap:12px; flex-wrap:wrap;
+    font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em;
+    color:var(--ink-soft); text-transform:uppercase;
+    border-bottom:1px solid var(--grid-strong);
+    padding-bottom:10px; margin-bottom:18px;
+  }
+  .doc-row span b{color:var(--ink); font-weight:600;}
+
+  .hero-eyebrow{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--accent); font-weight:600;
+    display:flex; align-items:center; gap:8px; margin-bottom:10px;
+  }
+  .hero-eyebrow::before{content:""; width:22px; height:1.5px; background:var(--accent);}
+  h1.hero{font-size:clamp(34px,6vw,58px); line-height:1.03; margin-bottom:14px;}
+  h1.hero em{font-style:normal; color:var(--accent);}
+  .hero-sub{font-size:17px; color:var(--ink-soft); max-width:56ch; margin-bottom:22px;}
+
+  .cta-row{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:6px;}
+  .cta{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--accent); color:var(--accent-ink);
+    font-family:var(--font-mono); font-weight:600; font-size:15px;
+    padding:14px 22px; border-radius:3px; text-decoration:none;
+    box-shadow:0 3px 0 var(--line);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .cta:hover{transform:translateY(-2px); box-shadow:0 5px 0 var(--line);}
+  .cta:active{transform:translateY(1px); box-shadow:0 2px 0 var(--line);}
+  .cta-note{font-size:13px; color:var(--ink-faint); font-family:var(--font-mono);}
+
+  .price-tag{
+    font-family:var(--font-mono); font-size:14px; color:var(--ink-soft);
+    display:flex; gap:18px; flex-wrap:wrap; margin-top:20px;
+    padding-top:14px; border-top:1px dashed var(--grid-strong);
+  }
+  .price-tag b{color:var(--ink); font-size:15px;}
+
+  /* ---------- section rhythm ---------- */
+  section{padding:56px 0;}
+  .kicker{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--ink-faint); margin-bottom:10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .kicker::before{content:""; width:8px; height:8px; border:1.5px solid var(--accent); transform:rotate(45deg); flex:none;}
+  h2.section-title{font-size:clamp(26px,4vw,36px); margin-bottom:18px;}
+  .lede{font-size:17px; color:var(--ink-soft); max-width:62ch;}
+
+  hr.tick{
+    border:none; height:1px; background:var(--grid-strong);
+    margin:0 0 40px;
+  }
+
+  /* ---------- problem/solution ---------- */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:36px;}
+  @media (max-width:680px){ .split{grid-template-columns:1fr;} }
+  .panel{
+    background:var(--paper-raised);
+    border:1px solid var(--grid-strong);
+    border-radius:4px;
+    padding:22px 24px;
+  }
+  .panel h3{font-size:20px; margin-bottom:10px;}
+  .panel p{color:var(--ink-soft); font-size:15px; margin:0;}
+  .panel.solution{border-color:var(--accent); box-shadow: 4px 4px 0 var(--shadow);}
+
+  /* ---------- schematic method list ---------- */
+  .schematic{position:relative; margin-top:10px;}
+  .spine{
+    position:absolute; left:27px; top:14px; bottom:14px; width:2px;
+    background:repeating-linear-gradient(var(--line) 0 6px, transparent 6px 12px);
+    opacity:0.55;
+  }
+  .node{
+    position:relative; display:grid; grid-template-columns:56px 1fr; gap:18px;
+    padding:18px 0; align-items:start;
+  }
+  .node-id{
+    font-family:var(--font-mono); font-weight:700; font-size:15px;
+    width:40px; height:40px; border-radius:50%;
+    border:2px solid var(--line); background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    z-index:1; color:var(--ink);
+  }
+  .node h3{font-size:19px; margin-bottom:5px;}
+  .node p{margin:0 0 8px; color:var(--ink-soft); font-size:14.5px; max-width:60ch;}
+  .node .spec{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--ink-faint);
+    display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .node .spec b{color:var(--good); font-weight:600;}
+
+  /* ---------- who for/not ---------- */
+  .fit-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:8px;}
+  @media (max-width:680px){ .fit-grid{grid-template-columns:1fr;} }
+  .fit-col{padding:20px 22px; border-radius:4px; border:1px solid var(--grid-strong);}
+  .fit-col.yes{border-left:4px solid var(--good);}
+  .fit-col.no{border-left:4px solid var(--accent);}
+  .fit-col h3{font-size:15px; text-transform:uppercase; letter-spacing:0.06em; font-family:var(--font-mono); margin-bottom:12px;}
+  .fit-col ul{margin:0; padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
+  .fit-col li{margin-bottom:8px;}
+
+  /* ---------- spec sheet pricing ---------- */
+  .specsheet{
+    border:1.5px solid var(--line); border-radius:4px; overflow:hidden; margin-top:10px;
+  }
+  .spec-row{
+    display:grid; grid-template-columns:180px 1fr; gap:14px;
+    padding:13px 20px; border-bottom:1px dashed var(--grid-strong);
+    font-size:14.5px; align-items:baseline;
+  }
+  .spec-row:last-child{border-bottom:none;}
+  .spec-row .label{font-family:var(--font-mono); text-transform:uppercase; font-size:11.5px; letter-spacing:0.08em; color:var(--ink-faint);}
+  .spec-row .val{color:var(--ink); font-weight:600;}
+  .spec-row .val.price{font-family:var(--font-mono); font-size:22px; color:var(--accent);}
+  @media (max-width:560px){ .spec-row{grid-template-columns:1fr;} }
+
+  /* ---------- faq ---------- */
+  .faq-item{border-bottom:1px solid var(--grid-strong);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; cursor:pointer;
+    display:flex; justify-content:space-between; align-items:center; gap:16px;
+    padding:18px 4px; font-family:var(--font-body); font-weight:600; font-size:16px;
+    color:var(--ink); font-size:16px;
+  }
+  .faq-q .plus{font-family:var(--font-mono); color:var(--accent); font-size:20px; flex:none; transition:transform .15s ease;}
+  .faq-item[open] .plus{transform:rotate(45deg);}
+  .faq-a{padding:0 4px 18px; color:var(--ink-soft); font-size:15px; max-width:66ch;}
+  .faq-q::-webkit-details-marker{display:none;}
+
+  /* ---------- footer ---------- */
+  footer{padding:40px 0 60px; border-top:1px solid var(--grid-strong); margin-top:20px;}
+  footer p{font-size:12.5px; color:var(--ink-faint); font-family:var(--font-mono); line-height:1.7; max-width:70ch;}
+  footer .final-cta{margin-bottom:26px;}
+
+  @media (prefers-reduced-motion: no-preference){
+    .draw{ stroke-dasharray:600; stroke-dashoffset:600; animation:draw 1.1s ease forwards; }
+    @keyframes draw{ to{ stroke-dashoffset:0; } }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="titleblock">
+    <div class="doc-row">
+      <span>Doc: <b>AI Income Blueprint</b></span>
+      <span>Format: <b>PDF, 16 pp.</b></span>
+      <span>Rev: <b>2026 Ed.</b></span>
+      <span>Delivery: <b>Instant download</b></span>
+    </div>
+    <div class="hero-eyebrow">Digital Guide — Instant PDF Download</div>
+    <h1 class="hero">Build real income with AI tools.<br><em>No coding required.</em></h1>
+    <p class="hero-sub">A step-by-step blueprint for seven ways real people are using AI to land clients and make sales in 2026 — with the tools, the pricing, and the exact first move for each one.</p>
+    <div class="cta-row">
+      <a class="cta" href="https://www.checkout-ds24.com/product/732769" target="_blank" rel="noopener">Get the Blueprint — $47 →</a>
+      <span class="cta-note">Instant PDF download · 60-day guarantee</span>
+    </div>
+    <div class="price-tag">
+      <span><b>7</b> methods</span>
+      <span><b>16</b> pages</span>
+      <span><b>$47</b> one-time</span>
+      <span><b>60-day</b> money back</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="kicker">The problem</div>
+    <h2 class="section-title">You've seen what AI can do. You still don't have a system.</h2>
+    <div class="split">
+      <div class="panel">
+        <h3>Where most people get stuck</h3>
+        <p>A hundred YouTube videos telling you AI will change everything, and not one of them telling you what to actually build first, what to charge, or who to send the first message to. So the tools sit open in a tab, and nothing ships.</p>
+      </div>
+      <div class="panel solution">
+        <h3>What this changes</h3>
+        <p>AI Income Blueprint replaces the noise with one decision: pick a lane, follow the exact steps, send the first message this week. Seven methods, chosen because they need no audience, no code, and under $50 to start.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="tick">
+
+  <section>
+    <div class="kicker">Fig. 1 — What's inside</div>
+    <h2 class="section-title">Seven methods. Each one built to reach a first sale fast.</h2>
+    <p class="lede">Every method includes the tools to use, how to price it, and a real first-outreach script — not just the idea.</p>
+
+    <div class="schematic">
+      <div class="spine"></div>
+
+      <div class="node">
+        <div class="node-id">01</div>
+        <div>
+          <h3>AI-Assisted Freelance Writing</h3>
+          <p>Newsletters, blog posts, and product descriptions for small businesses — drafted fast with AI, finished by you.</p>
+          <div class="spec">Tools: ChatGPT, Claude &nbsp;·&nbsp; <b>$300–$2,000/mo typical</b> &nbsp;·&nbsp; First sale: 1–2 weeks</div>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-id">02</div>
+        <div>
+          <h3>Custom GPT Bots &amp; No-Code Assistants</h3>
+          <p>Build a single-purpose AI assistant that replaces a business's repetitive weekly task.</p>
+          <div class="spec">Tools: GPT Builder &nbsp;·&nbsp; <b>$500–$1,500 per setup</b> &nbsp;·&nbsp; First sale: 2–3 weeks</div>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-id">03</div>
+        <div>
+          <h3>Workflow Automation for Small Business</h3>
+          <p>Connect forms, inboxes, and spreadsheets with AI steps dropped in wherever judgment is needed.</p>
+          <div class="spec">Tools: Zapier, Make &nbsp;·&nbsp; <b>$750–$3,000 per project</b> &nbsp;·&nbsp; First sale: 2–4 weeks</div>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-id">04</div>
+        <div>
+          <h3>AI-Enhanced Digital Products</h3>
+          <p>Prompt packs, templates, and guides — built once, sold on repeat through Gumroad, Etsy, or Digistore24.</p>
+          <div class="spec">Tools: Gumroad, Digistore24 &nbsp;·&nbsp; <b>$19–$99 per sale</b> &nbsp;·&nbsp; First sale: 2–6 weeks</div>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-id">05</div>
+        <div>
+          <h3>Faceless YouTube Channels</h3>
+          <p>Scripts, voiceover, and thumbnails handled by AI — you never need to be on camera.</p>
+          <div class="spec">Tools: TTS, Midjourney &nbsp;·&nbsp; Ad rev + sponsorships &nbsp;·&nbsp; First payout: 1–3 months</div>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-id">06</div>
+        <div>
+          <h3>AI Chatbots for Local Businesses</h3>
+          <p>A booking-and-FAQ bot for salons, clinics, and shops that lose customers after hours.</p>
+          <div class="spec">Tools: Voiceflow, Relevance AI &nbsp;·&nbsp; Setup + monthly retainer &nbsp;·&nbsp; First sale: 1–3 weeks</div>
+        </div>
+      </div>
+
+      <div class="node">
+        <div class="node-id">07</div>
+        <div>
+          <h3>AI Research &amp; Reporting Services</h3>
+          <p>Weekly competitor briefs and industry roundups, researched fast and packaged for a standing client.</p>
+          <div class="spec">Tools: Perplexity &nbsp;·&nbsp; <b>$250–$1,500/mo</b> &nbsp;·&nbsp; First sale: 1–2 weeks</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="lede" style="margin-top:28px;">Plus: a <b>decision framework</b> to match your skills to the right method, a <b>week-by-week 30-day action plan</b>, a directory of every tool named above, and a chapter on the six mistakes that stall people in month one.</p>
+  </section>
+
+  <hr class="tick">
+
+  <section>
+    <div class="kicker">Fit check</div>
+    <h2 class="section-title">Who this is actually for</h2>
+    <div class="fit-grid">
+      <div class="fit-col yes">
+        <h3>This is for you if</h3>
+        <ul>
+          <li>You can give it 3–10 hours a week, consistently</li>
+          <li>You want one clear plan instead of another hour of research</li>
+          <li>You're willing to send the first message before you feel ready</li>
+        </ul>
+      </div>
+      <div class="fit-col no">
+        <h3>This isn't for you if</h3>
+        <ul>
+          <li>You're looking for guaranteed income with zero effort</li>
+          <li>You want to run five methods at once starting tomorrow</li>
+          <li>You expect the AI to do the client relationship for you</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="tick">
+
+  <section>
+    <div class="kicker">Spec sheet</div>
+    <h2 class="section-title">Get the blueprint</h2>
+    <div class="specsheet">
+      <div class="spec-row"><span class="label">Format</span><span class="val">Digital PDF, instant download — no physical item is shipped</span></div>
+      <div class="spec-row"><span class="label">Length</span><span class="val">16 pages · 13 chapters</span></div>
+      <div class="spec-row"><span class="label">Delivery</span><span class="val">Immediately after purchase, via your secure Digistore24 download link (also emailed to you)</span></div>
+      <div class="spec-row"><span class="label">Guarantee</span><span class="val">60-day money-back guarantee, full refund, requested directly through Digistore24 — no questions asked</span></div>
+      <div class="spec-row"><span class="label">Price</span><span class="val price">$47 USD <span class="mono" style="font-size:13px;color:var(--ink-faint);">— one-time payment</span></span></div>
+    </div>
+    <div class="cta-row" style="margin-top:24px;">
+      <a class="cta" href="https://www.checkout-ds24.com/product/732769" target="_blank" rel="noopener">Get the Blueprint — $47 →</a>
+      <span class="cta-note">Secure checkout via Digistore24.com</span>
+    </div>
+  </section>
+
+  <hr class="tick">
+
+  <section>
+    <div class="kicker">FAQ</div>
+    <h2 class="section-title">Before you buy</h2>
+
+    <details class="faq-item" open>
+      <summary class="faq-q">What exactly do I get after I pay?<span class="plus">+</span></summary>
+      <div class="faq-a">An instant digital download: a 16-page PDF guide, delivered immediately through Digistore24's secure download link and sent to your email. Nothing is mailed — there's no physical product.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Do I need coding or technical experience?<span class="plus">+</span></summary>
+      <div class="faq-a">No. Every method was chosen because it uses no-code AI tools. If you can send an email and follow a checklist, you can start.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Will this guarantee me a certain income?<span class="plus">+</span></summary>
+      <div class="faq-a">No — and be wary of anyone who promises that. The guide gives you real methods, real tools, and typical income ranges reported by others, but your results depend on the effort and consistency you put in. It's a system, not a lottery ticket.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">What if it's not right for me?<span class="plus">+</span></summary>
+      <div class="faq-a">You're covered by a 60-day money-back guarantee. Request a refund directly through Digistore24 — no questions asked.</div>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Is my payment secure?<span class="plus">+</span></summary>
+      <div class="faq-a">Yes. All payments are processed by Digistore24.com, an established payment processor and marketplace that handles checkout, receipts, and buyer protection for this purchase.</div>
+    </details>
+  </section>
+
+  <footer>
+    <div class="final-cta cta-row">
+      <a class="cta" href="https://www.checkout-ds24.com/product/732769" target="_blank" rel="noopener">Get the Blueprint — $47 →</a>
+      <span class="cta-note">Instant PDF download · 60-day guarantee</span>
+    </div>
+    <p>AI Income Blueprint is a digital guide sold and delivered via Digistore24.com. Digistore24 processes payment, handles delivery of the download, and administers the money-back guarantee. This page describes a self-directed educational guide and reports no guaranteed income or results.</p>
+  </footer>
+
+</div>
